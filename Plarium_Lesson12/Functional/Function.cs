@@ -254,8 +254,9 @@ namespace Plarium_Lesson12
                         decimal price = Input.InputPrice();
                         if (souvenir.Price != price)
                         {
-                            Database.ChangePrice(souvenir, price);
-                            flag = true;
+                        Thread threadChangePrice = new Thread(delegate () { Database.ChangePrice(souvenir, price); });
+                        threadChangePrice.Start();
+                         flag = true;
                         }
                         else
                         {

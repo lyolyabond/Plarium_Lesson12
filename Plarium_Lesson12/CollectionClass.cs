@@ -32,7 +32,7 @@ namespace Plarium_Lesson12
         {
             Souvenirs = new List<Souvenir>();
         }
-        object locker = new object();
+        static object locker = new object();
 
         /// <summary>
         /// Индексатор по элементам списка сувениров

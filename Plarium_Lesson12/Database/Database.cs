@@ -15,7 +15,6 @@ namespace Plarium_Lesson12
         /// </summary>
         public static void CreateDatabase()
         {
-           
             if (File.Exists(Menu.databasePath))
             {
                 Console.WriteLine("Файл уже существует!");
@@ -116,13 +115,16 @@ namespace Plarium_Lesson12
             if (File.Exists(Menu.databasePath))
             {
                 string text;
+                _rw.EnterReadLock();
                 using (var sr = new StreamReader(Menu.databasePath))
                 {
                     text = sr.ReadToEnd();
                 }
 
                 string oldRecord = souvenir.Record();
-                
+                 _rw.ExitReadLock();
+
+                _rw.EnterWriteLock();
                 if (text.Contains(oldRecord))
                 {
                     souvenir.Price = newPrice;
@@ -136,6 +138,7 @@ namespace Plarium_Lesson12
                     File.Delete(Menu.databasePath);
                     File.Move(pathTemporary, Menu.databasePath);
                 }
+                _rw.ExitWriteLock();
 
             }
         }
