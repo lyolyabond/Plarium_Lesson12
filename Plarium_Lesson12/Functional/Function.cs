@@ -16,8 +16,8 @@ namespace Plarium_Lesson12
             //Проверка списка на пустоту
             if (AddDelete.collectionClass.Length() > 0)
             {
-                using (var sw = new StreamWriter(Program.path, true))
-                {
+                lock (CollectionClass.locker)
+                { 
                     //Проход по элементам списка
                     foreach (Souvenir souvenir in AddDelete.collectionClass)
                     {
@@ -40,7 +40,6 @@ namespace Plarium_Lesson12
         /// <param name="obj"></param>
         static void KeyMatchingForList(object obj)
         {
-           
             int key = (int)obj;
             //Выборка единственного элемента Souvenir, с которым совпадает ключ
               Souvenir value = AddDelete.collectionClass.Souvenirs.Single(souvenir => souvenir.ManufacturerRequisites == key);
@@ -49,7 +48,6 @@ namespace Plarium_Lesson12
                     {
                         value.WriteToFileInformationSouvenir(sw);
                     }
-
         }
 
         /// <summary>

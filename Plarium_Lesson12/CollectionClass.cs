@@ -25,6 +25,7 @@ namespace Plarium_Lesson12
     //Коллекция сущностей(список) представлена в виде класса 
     class CollectionClass 
     {
+        public static object locker = new object();
         //Список объектов класса сувенира
         [DataMember]
         public List<Souvenir> Souvenirs { get; set; }
@@ -32,7 +33,7 @@ namespace Plarium_Lesson12
         {
             Souvenirs = new List<Souvenir>();
         }
-        static object locker = new object();
+        
 
         /// <summary>
         /// Индексатор по элементам списка сувениров

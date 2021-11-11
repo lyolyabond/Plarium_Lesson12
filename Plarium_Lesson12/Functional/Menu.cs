@@ -9,6 +9,7 @@ namespace Plarium_Lesson12
     {
         public static string databasePath = "Database.txt";
         static Thread threadSort;
+        static Thread threadDisplay;
         /// <summary>
         /// Меню для взаимодействия с коллекциями
         /// </summary>
@@ -88,6 +89,9 @@ namespace Plarium_Lesson12
                             threadSort = new Thread(new ThreadStart(sortDelegate));
                             threadSort.Start();
                             Function.SortList(sortDelegate);
+                            threadDisplay = new Thread(Function.DisplayAllInformation);
+                            threadDisplay.Start();
+                            threadDisplay.Join();
                             break;
                         case 10:
                             Console.Clear();
@@ -95,6 +99,9 @@ namespace Plarium_Lesson12
                             threadSort = new Thread(new ThreadStart(sortDelegate));
                             threadSort.Start();
                             Function.SortList(sortDelegate);
+                            threadDisplay = new Thread(Function.DisplayAllInformation);
+                            threadDisplay.Start();
+                            threadDisplay.Join();
                             break;
                         case 11:
                             Console.Clear();
